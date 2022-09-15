@@ -17,15 +17,18 @@ public static class RegExpr
         }
     }
 
-    public static IEnumerable<(int width, int height)> Resolution(string resolutions){
+    public static IEnumerable<(int width, int height)> Resolution(IEnumerable<string> resolutions){
 
         var pattern = @"(?<width>[0-9]+)x(?<height>[0-9]+)([, ] )*";
 
-        var match = Regex.Match(resolutions, pattern);
-        while(match.Success){
-            yield return (int.Parse(match.Groups["width"].Value), int.Parse(match.Groups["height"].Value));
-            match = match.NextMatch();
+        foreach(var res in resolutions){
+            var match = Regex.Match(res, pattern);
+            while(match.Success){
+                yield return (int.Parse(match.Groups["width"].Value), int.Parse(match.Groups["height"].Value));
+                match = match.NextMatch();
+            }       
         }
+        
     }
 
     public static IEnumerable<string> InnerText(string html, string tag){

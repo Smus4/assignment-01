@@ -20,12 +20,12 @@ public class RegExprTests
     public void Resolution_should_return_stream_tuples()
     {
         // Given
-            var string1 = "1024x768, 800x600, 640x480";
-            var string2 = "320x200, 320x240, 800x600";
+            IEnumerable<string> stream1 = new List<string>(){"1024x768", "800x600", "640x480"};
+            IEnumerable<string> stream2 = new List<string>(){"320x200", "320x240", "800x600"};
             
         // When
-            var result1 = RegExpr.Resolution(string1);
-            var result2 = RegExpr.Resolution(string2);
+            var result1 = RegExpr.Resolution(stream1);
+            var result2 = RegExpr.Resolution(stream2);
 
         // Then
             result1.Should().BeEquivalentTo(new List<(int width, int height)>(){(1024, 768), (800, 600), (640, 480)});
