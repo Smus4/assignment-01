@@ -43,8 +43,9 @@ public static class RegExpr
     }
 
     public static IEnumerable<(Uri url, string title)> Urls(string html){
-        var pattern = $@"<([a-z]+) href=""(?<url>.*?)?""( [title=""]+(?<titleText>[(]*[A-Za-z ]+[)]*)"")*[^>]*>(?<innerText>.*?)</\1>";
-
+        //var pattern = $@"<([a-z]+) href=""(?<url>.*?)?""( [title=""]+(?<titleText>[(]*[A-Za-z ]+[)]*)"")*[^>]*>(?<innerText>.*?)</\1>";
+        //var pattern = $@"<([a-z]+) href=""(?<url>.*?)?"" [title=""]+(?<titleText>([(]*[A-Za-z ]*[)]*)*)""[^>]*>(?<innerText>.*?)</\1>";
+        var pattern = $@"<([a-z]+) href=""(?<url>.*?)?""( [title=""]+(?<titleText>([(]*[A-Za-z ]*[)]*)*)"")*[^>]*>(?<innerText>.*?)</\1>";
         var match = Regex.Match(html, pattern);
         
         while(match.Success){
